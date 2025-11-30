@@ -6,6 +6,8 @@ import usuarioRoutes from "./routes/usuario.routes.js"
 import odontologoRoutes from "./routes/odontologo.routes.js"
 import pacienteRoutes from "./routes/paciente.routes.js"
 import historiaRoutes from "./routes/historia.routes.js"
+import procedimientoRoutes from "./routes/procedimiento.routes.js"
+import citaRoutes from "./routes/cita.routes.js"
 
 const app = express()
 
@@ -18,5 +20,8 @@ app.use("/usuario", usuarioRoutes)
 app.use("/odontologo", odontologoRoutes)
 app.use("/paciente", pacienteRoutes)
 app.use("/historia", historiaRoutes)
+app.use("/procedimiento", procedimientoRoutes)
+app.use("/cita", citaRoutes)
+
 
 export default app

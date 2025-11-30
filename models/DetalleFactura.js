@@ -37,12 +37,26 @@ const DetalleFactura = sequelize.define("DetalleFactura", {
   precio_unitario: {
     type: DataTypes.DECIMAL(10,2),
     allowNull: false,
-    defaultValue: 0
+    defaultValue: 0,
+    validate: {
+      min: 0
+    },
+    get() {
+      const raw = this.getDataValue("precio_unitario")
+      return raw ? parseFloat(raw) : null
+    }
   },
   subtotal: {
     type: DataTypes.DECIMAL(10,2),
     allowNull: false,
-    defaultValue: 0
+    defaultValue: 0,
+    validate: {
+      min: 0
+    },
+    get() {
+      const raw = this.getDataValue("subtotal")
+      return raw ? parseFloat(raw) : null
+    }
   }
 })
 

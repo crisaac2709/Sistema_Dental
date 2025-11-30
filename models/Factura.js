@@ -38,17 +38,38 @@ const Factura = sequelize.define("Facturas", {
   subtotal:{
     type: DataTypes.DECIMAL(10,2),
     defaultValue: 0,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      min: 0
+    },
+    get() {
+      const raw = this.getDataValue("subtotal")
+      return raw ? parseFloat(raw) : null
+    }
   },
   impuestos:{
     type: DataTypes.DECIMAL(10,2),
     defaultValue: 0,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      min: 0
+    },
+    get() {
+      const raw = this.getDataValue("impuestos")
+      return raw ? parseFloat(raw) : null
+    }
   },
   total:{
     type: DataTypes.DECIMAL(10,2),
     defaultValue: 0,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      min: 0
+    },
+    get() {
+      const raw = this.getDataValue("total")
+      return raw ? parseFloat(raw) : null
+    }
   },
   estado: {
     type: DataTypes.STRING(25),

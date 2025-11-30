@@ -33,7 +33,14 @@ const Pago = sequelize.define("Pagos", {
     monto: {
         type: DataTypes.DECIMAL(10,2),
         defaultValue: 0,
-        allowNull: false
+        allowNull: false,
+        validate: {
+            min: 0
+        },
+        get() {
+            const raw = this.getDataValue("monto")
+            return raw ? parseFloat(raw) : null
+        }
     },
     metodo_pago: {
         type: DataTypes.STRING(25),

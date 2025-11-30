@@ -52,7 +52,9 @@ const Cita = sequelize.define("Citas", {
 // Relacion paciente con citas
 Paciente.hasMany(Cita, {
   foreignKey: "pacienteId",
-  as: "citas_paciente"
+  as: "citas_paciente",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE"
 })
 
 Cita.belongsTo(Paciente, {
@@ -63,7 +65,9 @@ Cita.belongsTo(Paciente, {
 // Relacion odontologo con citas
 Odontologo.hasMany(Cita, {
   foreignKey: "odontologoId",
-  as: "citas_odontologo"
+  as: "citas_odontologo",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE"
 })
 
 Cita.belongsTo(Odontologo, {
@@ -74,7 +78,9 @@ Cita.belongsTo(Odontologo, {
 // Relacion historia clinica con citas
 HistoriaClinica.hasMany(Cita, {
   foreignKey: "historiaId",
-  as: "citas"
+  as: "citas",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE"
 })
 
 Cita.belongsTo(HistoriaClinica, {
@@ -85,7 +91,9 @@ Cita.belongsTo(HistoriaClinica, {
 // Relacion usuario con citas
 Usuario.hasMany(Cita, {
   foreignKey: "usuarioId",
-  as: "citas_usuario"
+  as: "citas_usuario",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE"
 })
 
 Cita.belongsTo(Usuario, {

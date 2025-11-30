@@ -41,7 +41,11 @@ const Procedimiento = sequelize.define("Procedimientos", {
     allowNull: false,
     validate: {
       min: 0
-    }
+    },
+    get() {
+    const raw = this.getDataValue('precioBase')
+    return raw ? parseFloat(raw) : null
+  }
   }
 }, {timestamps:true})
 

@@ -96,7 +96,31 @@ export const profile = async(req, res) => {
 
 
 export const obtenerUsuarios = async(req, res) => {
-    const users = await Usuario.findAll()
+    const users = await Usuario.findAll({ attributes: {exclude: ["password"]}, include: {
+        model: Rol,
+        as: "rol",
+        attributes: ["nombre"]
+    }})
     res.json(users)
 }
 
+export const obtenerUsuarioPorId = async(req, res) => {
+    try {
+        const {usuarioId} = req.params
+        const usuario = await Usuario.findByPk(usuarioId, {
+            attributes: {
+                exclude: ["password"]
+            }, 
+            include: {
+                model: Rol,
+                as: "rol",
+                attributes: ["nombre"]
+            }
+        })
+
+        if (!usuario) return res.status(404).json({message: "Ese usuario no existe"})
+        res.json(usuario)
+    } catch(error) {
+        res.status(500).json({message: `Algo salio mal al obtener usuario: ${error.message}`})
+    }
+}
