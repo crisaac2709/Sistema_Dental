@@ -38,7 +38,9 @@ const Odontologo = sequelize.define("Odontologos", {
 
 Usuario.hasOne(Odontologo, {
     foreignKey: "usuarioId",
-    as: "odontologo"
+    as: "odontologo",
+    onUpdate: "CASCADE",
+    onDelete: "CASCADE"
 })
 
 Odontologo.belongsTo(Usuario, {

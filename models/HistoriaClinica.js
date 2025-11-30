@@ -37,7 +37,9 @@ const HistoriaClinica = sequelize.define("HistoriaClinica", {
 
 Paciente.hasMany(HistoriaClinica, {
   foreignKey: "pacienteId",
-  as: "historia_clinica_paciente"
+  as: "historia_clinica_paciente",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE"
 })
 
 HistoriaClinica.belongsTo(Paciente, {

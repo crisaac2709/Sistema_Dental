@@ -13,8 +13,8 @@ async function main() {
     try {
         await sequelize.authenticate()
         console.log('✅ DB conectada correctamente.')
-        await sequelize.sync({alter:true})
-        console.log('All models were synchronized successfully.');
+        //await sequelize.sync()
+        //console.log('All models were synchronized successfully.');
         app.listen(PORT, ()=>{
             console.log(`Servidor corriendo en http://localhost:${PORT}`)
         })
