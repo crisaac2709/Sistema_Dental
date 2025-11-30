@@ -48,7 +48,9 @@ const Tratamiento = sequelize.define("Tratamientos", {
 // Relaciones
 Cita.hasMany(Tratamiento, {
   foreignKey: "citaId",
-  as: "citas_tratamiento"
+  as: "citas_tratamiento",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE"
 })
 
 Tratamiento.belongsTo(Cita, {
@@ -59,7 +61,9 @@ Tratamiento.belongsTo(Cita, {
 
 Procedimiento.hasMany(Tratamiento, {
   foreignKey: "procedimientoId",
-  as: "tratamientos_procedimiento"
+  as: "tratamientos_procedimiento",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE"
 })
 
 Tratamiento.hasMany(Procedimiento, {

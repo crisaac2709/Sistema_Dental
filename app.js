@@ -8,6 +8,8 @@ import pacienteRoutes from "./routes/paciente.routes.js"
 import historiaRoutes from "./routes/historia.routes.js"
 import procedimientoRoutes from "./routes/procedimiento.routes.js"
 import citaRoutes from "./routes/cita.routes.js"
+import tratamientoRoutes from "./routes/tratamiento.routes.js"
+import facturaRoutes from "./routes/factura.routes.js"
 
 const app = express()
 
@@ -22,6 +24,8 @@ app.use("/paciente", pacienteRoutes)
 app.use("/historia", historiaRoutes)
 app.use("/procedimiento", procedimientoRoutes)
 app.use("/cita", citaRoutes)
+app.use("/tratamiento", tratamientoRoutes)
+app.use("/factura", facturaRoutes)
 
 
 export default app

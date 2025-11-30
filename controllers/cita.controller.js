@@ -89,7 +89,7 @@ export const obtenerCitasPorOdontologo = async(req, res) => {
 
         if (!odontologo) return res.status(404).json({message: "No eres odontologo"})
 
-        const citas = await Cita.findOne({
+        const citas = await Cita.findAll({
             where: {
                 odontologoId: odontologo.odontologoId
             }
@@ -138,3 +138,44 @@ export const eliminarCita = async(req, res) => {
 }
 
 
+export const actualizarEstadoCita = async(req, res) => {
+    try {
+        const {citaId} = req.params
+        const {usuarioId} = req.user
+        const {estado} = req.body
+
+        const estados = ["Pendiente", "Confirmada", "Atendida", "Cancelada", "No asistio"]
+
+        const odontologo = await Odontologo.findOne({
+            where: {
+                usuarioId
+            }
+        })
+
+        if (!odontologo) return res.status(403).json({message: "No tienes permitido borrar esta cita"})
+
+        const cita = await Cita.findOne({
+            where: {
+                citaId,
+                odontologoId: odontologo.odontologoId
+            }
+        })
+
+        if (!cita) return res.status(404).json({message: "Cita no existente o no eres autorizado para eliminarla"})
+        
+        const estado_encontrado = estados.find(x => x.toLowerCase().trim() === estado.toLowerCase().trim())
+        if (!estado_encontrado) return res.status(400).json({message: "Estado enviado no valido"})
+
+        cita.estado = estado_encontrado ?? cita.estado
+
+        await cita.save()
+
+        res.status(200).json({
+            message: "Estado de la cita actualizada correctamente",
+            estado: cita.estado
+        })
+
+    } catch(error) {
+        res.status(500).json({message: `Error al actualizar estado de la cita : ${error.message}`})
+    }
+}
